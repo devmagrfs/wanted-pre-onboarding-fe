@@ -41,7 +41,7 @@ function LoginForm() {
     localStorage.clear();
     localStorage.setItem('loginId', id);
     localStorage.setItem('loginPwd', password);
-    navigate('/main');
+    navigate('/');
   }, [id, password])
 
   return(
