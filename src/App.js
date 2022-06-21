@@ -1,8 +1,18 @@
 import React from 'react';
-import PreAssignmentGuide from './pages/PreAssignmentGuide';
+import { Route, Routes } from 'react-router-dom';
+import Header from './components/Header';
+import Login from './pages/Login';
+import Main from './pages/Main';
 
 function App() {
-  return <PreAssignmentGuide />;
+  return (
+    <div className="App">
+        <Routes>
+          <Route path='/' element={<Login />} />
+          <Route path='/main' element={<Main />} />
+        </Routes>
+    </div>
+  )
 }
 
 export default App;
