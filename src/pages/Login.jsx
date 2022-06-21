@@ -9,10 +9,9 @@ const LoginContainer = styled.div`
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  border: 2px solid black;
   padding: 10px;
-  width: 20rem;
-  min-height: 200px;
+  min-width: 300px;
+  min-height: 400px;
   margin: 50px auto;
 `;
 

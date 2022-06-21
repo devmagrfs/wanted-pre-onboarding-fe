@@ -9,10 +9,25 @@ const LoginFormStyled = styled.form`
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  margin-top: 1rem;
+  width: 350px;
 `;
 
 const Input = styled.input`
-  margin: 5px;
+  border: 1px solid;
+  color: black;
+  font-weight: bold;
+  margin-bottom: 5px;
+  padding: 0.7rem 0.5rem;
+  width: 100%;
+  border-radius: 3px;
+`;
+
+const Button = styled.button`
+  margin-top: 5px;
+  padding: 0.5rem;
+  border-radius: 3px;
+  width: 100%;
 `;
 
 function LoginForm() {
@@ -43,9 +58,9 @@ function LoginForm() {
         onChange={onChangePassword}
         required
       />
-      <button htmltype="submit">
+      <Button htmltype="submit">
         로그인
-      </button>
+      </Button>
     </LoginFormStyled>
   )
 }
