@@ -1,0 +1,22 @@
+{
+  "feeds": [
+    {
+      "id": 1,
+      "nickname": "wanted",
+      "img": "https://source.unsplash.com/random/600x500",
+      "likes": 3
+    },
+    {
+      "id": 2,
+      "nickname": "pre_onbording",
+      "img": "https://source.unsplash.com/random/900x500",
+      "likes": 8
+    },
+    {
+      "id": 3,
+      "nickname": "pass_the_exam",
+      "img": "https://source.unsplash.com/random/700x1080",
+      "likes": 7
+    }
+  ]
+}

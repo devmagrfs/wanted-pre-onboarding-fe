@@ -1,14 +1,20 @@
 import React from 'react';
 import styled from 'styled-components';
 
+import { BiDotsHorizontalRounded, BiPaperPlane } from 'react-icons/bi';
+import { AiOutlineHeart } from 'react-icons/ai';
+import { FaRegCommentDots, FaRegBookmark } from 'react-icons/fa';
+import Comment from './Comment';
+
+
 const nickname = 'wanted';
+const likes = 9;
 
 const FeedContainer = styled.div`
   display: flex;
   justify-content: center;
-  align-items: center;
+  flex-direction: column;
   width: 100%;
-  background: red;
 
   @media screen and (min-width: 576px) {
     max-width: 575px;
@@ -17,12 +23,19 @@ const FeedContainer = styled.div`
 
 const FeedProfile = styled.div`
   display: flex;
+  width: 100%;
   justify-content: space-between;
   align-items: center;
-  padding: 0.2rem 0.5rem;
+  padding: 0.2rem 1rem;
 
-  .profile-nickname {
-    font-weight: bold;
+  .profile-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    > span {
+      font-weight: bold;
+    }
   }
 `;
 
@@ -35,19 +48,48 @@ const FeedProfileImg = styled.img`
 `;
 
 const FeedImg = styled.img`
-  width: auto;
-  height: 100%;
+  width: 100%;
+`;
+
+const InstaUtil = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  padding: 0.5rem 1rem;
+
+  > .util-container {
+    display: flex;
+    justify-content: space-between;
+    width: 8rem;
+  }
+`;
+
+const Likes = styled.p`
+  padding: 0.5rem 1rem;
 `;
 
 function Feed() {
   return (
     <FeedContainer>
       <FeedProfile>
-        <FeedProfileImg />
-        <span className='profile-nickname'>{nickname}</span>
+        <div className="profile-content">
+          <FeedProfileImg />
+          <span className='profile-nickname'>{nickname}</span>
+        </div>
+        <BiDotsHorizontalRounded size={30} />
       </FeedProfile>
       <FeedImg />
-      Feed 내용내용내용
+      <InstaUtil>
+        <div className="util-container">
+          <AiOutlineHeart size={30} />
+          <FaRegCommentDots size={30} />
+          <BiPaperPlane size={30} />
+        </div>
+        <FaRegBookmark size={30} />
+      </InstaUtil>
+      <Likes>좋아요 {likes} 개</Likes>
+      <Comment />
     </FeedContainer>
   )
 }
