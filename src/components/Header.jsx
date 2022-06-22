@@ -1,6 +1,8 @@
 import React, { useCallback } from 'react';
 import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
+import { AiFillHome, AiOutlinePlusSquare, AiOutlineHeart, AiOutlineCompass } from 'react-icons/ai';
+import { BiPaperPlane } from 'react-icons/bi';
 
 import SmallLogo from '../assets/text_logo.png';
 import { useEffect } from 'react';
@@ -17,6 +19,7 @@ const HeaderContainer = styled.div`
   border-top: 2px solid gray;
   border-bottom: 2px solid gray;
   padding : 0.3rem 2rem;
+  background: white;
   z-index: 1;
   
   .header-search {
@@ -41,7 +44,7 @@ const Logo = styled.img`
 const ButtonWrapper = styled.div`
   display: flex;
   justify-content: space-between;
-  border: 1px solid purple;
+  width: 15rem;
   padding: 0;
   min-width: 10rem;
 
@@ -54,6 +57,7 @@ const IconBtn = styled.button`
   width: 50px;
   height: 30px;
   background: gray;
+  border-radius: 15px;
   cursor: pointer;
 `;
 
@@ -77,10 +81,14 @@ function Header() {
       <Logo src={SmallLogo} />
       <input type="text" className="header-search" placeholder="검색" />
       <ButtonWrapper>
-        <IconBtn />
-        <IconBtn />
-        <IconBtn />
-          <IconBtn onClick={logout}>Logout</IconBtn>
+        <AiFillHome size={30} />
+        <BiPaperPlane size={30} />
+        <AiOutlinePlusSquare size={30} />
+        <AiOutlineHeart size={30} />
+        <AiOutlineCompass size={30} />
+          <IconBtn onClick={logout}>
+            Logout
+          </IconBtn>
       </ButtonWrapper>
     </HeaderContainer>
   )

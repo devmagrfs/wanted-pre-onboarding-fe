@@ -12,6 +12,9 @@ const FeedContainer = styled.div`
   justify-content: center;
   flex-direction: column;
   width: 100%;
+  margin-bottom: 2rem;
+  outline: 2px solid gray;
+  border-radius: 4px;
 
   @media screen and (min-width: 576px) {
     max-width: 575px;
