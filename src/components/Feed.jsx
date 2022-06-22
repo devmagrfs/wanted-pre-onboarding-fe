@@ -7,9 +7,6 @@ import { FaRegCommentDots, FaRegBookmark } from 'react-icons/fa';
 import Comment from './Comment';
 
 
-const nickname = 'wanted';
-const likes = 9;
-
 const FeedContainer = styled.div`
   display: flex;
   justify-content: center;
@@ -69,7 +66,7 @@ const Likes = styled.p`
   padding: 0.5rem 1rem;
 `;
 
-function Feed() {
+function Feed({id, nickname, img, likes}) {
   return (
     <FeedContainer>
       <FeedProfile>
@@ -79,7 +76,7 @@ function Feed() {
         </div>
         <BiDotsHorizontalRounded size={30} />
       </FeedProfile>
-      <FeedImg />
+      <FeedImg src={img} />
       <InstaUtil>
         <div className="util-container">
           <AiOutlineHeart size={30} />
@@ -89,7 +86,7 @@ function Feed() {
         <FaRegBookmark size={30} />
       </InstaUtil>
       <Likes>좋아요 {likes} 개</Likes>
-      <Comment />
+      <Comment id={id} img={img} />
     </FeedContainer>
   )
 }
