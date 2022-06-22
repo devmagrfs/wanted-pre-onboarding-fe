@@ -13,8 +13,9 @@ const FeedContainer = styled.div`
   justify-content: center;
   flex-direction: column;
   width: 100%;
+  margin: 0;
   margin-bottom: 2rem;
-  outline: 2px solid gray;
+  border: 2px solid gray;
   border-radius: 4px;
 
   ${(props) => props.load
