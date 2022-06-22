@@ -49,6 +49,12 @@ const Button = styled.button`
   }
 `;
 
+// 이미 존재하는 아이디 테스트 케이스
+const admin = {
+  id: 'test@test.com',
+  password: 'Qwer1234!'
+};
+
 function LoginForm() {
   const idRef = useRef();
   const pwdRef = useRef();
@@ -88,13 +94,16 @@ function LoginForm() {
     }
   };
 
-  const onSubmitForm = useCallback(() => {
-    console.log(id, password);
+  const onSubmitForm = useCallback((e) => {
+    e.preventDefault();
+    if(admin.id === id) {
+      alert('동일한 아이디가 존재합니다.');
+      return;
+    }
     localStorage.clear();
     localStorage.setItem('loginId', id);
-    localStorage.setItem('loginPwd', password);
     navigate('/');
-  }, [id, password]);
+  }, [id]);
 
   useEffect(() => {
     if(idValid && pwdValid) {
