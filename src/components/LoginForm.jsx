@@ -117,25 +117,26 @@ function LoginForm() {
   return(
     <LoginFormStyled onSubmit={onSubmitForm}>
       <Input
-        type="text"
-        placeholder="전화번호, 사용자 이름 또는 전화번호"
+        type='text'
+        placeholder='전화번호, 사용자 이름 또는 전화번호'
         onChange={onChangeId}
         ref={idRef}
         valid={idValid}
         required
-        name="userId"
+        name='userId'
       />
       <Input
-        type="password"
-        placeholder="비밀번호"
+        type='password'
+        placeholder='비밀번호'
         onChange={onChangePwd}
         ref={pwdRef}
         valid={pwdValid}
         required
-        name="password"
+        name='password'
+        autoComplete='off'
       />
       <Button
-        htmltype="submit"
+        htmltype='submit'
         ref={btnRef}
         disabled
         valid={validComplete}

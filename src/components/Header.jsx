@@ -79,7 +79,7 @@ function Header() {
   return(
     <HeaderContainer>
       <Logo src={SmallLogo} />
-      <input type="text" className="header-search" placeholder="검색" />
+      <input type="text" className='header-search' placeholder='검색' />
       <ButtonWrapper>
         <AiFillHome size={30} />
         <BiPaperPlane size={30} />

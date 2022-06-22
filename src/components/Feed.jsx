@@ -5,6 +5,7 @@ import { BiDotsHorizontalRounded, BiPaperPlane } from 'react-icons/bi';
 import { AiOutlineHeart } from 'react-icons/ai';
 import { FaRegCommentDots, FaRegBookmark } from 'react-icons/fa';
 import Comment from './Comment';
+import { useState } from 'react';
 
 
 const FeedContainer = styled.div`
@@ -15,6 +16,15 @@ const FeedContainer = styled.div`
   margin-bottom: 2rem;
   outline: 2px solid gray;
   border-radius: 4px;
+
+  ${(props) => props.load
+      ? `
+          visibility: visible;
+        `
+      : `
+          visibility: hidden;
+        `
+  }
 
   @media screen and (min-width: 576px) {
     max-width: 575px;
@@ -70,18 +80,23 @@ const Likes = styled.p`
 `;
 
 function Feed({id, nickname, img, likes}) {
+  const [loading, setLoading] = useState(false);
+
   return (
-    <FeedContainer>
+    <FeedContainer load={loading}>
       <FeedProfile>
-        <div className="profile-content">
+        <div className='profile-content'>
           <FeedProfileImg />
           <span className='profile-nickname'>{nickname}</span>
         </div>
         <BiDotsHorizontalRounded size={30} />
       </FeedProfile>
-      <FeedImg src={img} />
+      <FeedImg
+        src={img}
+        onLoad={() => {setLoading(!loading)}}
+      />
       <InstaUtil>
-        <div className="util-container">
+        <div className='util-container'>
           <AiOutlineHeart size={30} />
           <FaRegCommentDots size={30} />
           <BiPaperPlane size={30} />
@@ -89,7 +104,7 @@ function Feed({id, nickname, img, likes}) {
         <FaRegBookmark size={30} />
       </InstaUtil>
       <Likes>좋아요 {likes} 개</Likes>
-      <Comment id={id} img={img} />
+      <Comment id={id} />
     </FeedContainer>
   )
 }

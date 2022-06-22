@@ -1,18 +1,7 @@
-import React, { useCallback, useRef } from 'react'
+import React, { useCallback, useRef, useState, useEffect } from 'react'
 import styled from 'styled-components';
 import { AiOutlineSmile } from 'react-icons/ai';
 
-const commentList = [{
-  id: '1',
-  nickname: 'test1',
-  content: 'test중1'
-},
-  {
-    id: '2',
-    nickname: 'test2',
-    content: 'test중'
-  }
-]
 
 const CommentContainer = styled.div`
   padding: 0;
@@ -49,13 +38,44 @@ const CommentForm = styled.form`
   }
 `;
 
-function Comment() {
+function Comment({ id }) {
   const commentRef = useRef();
+  const [commentContent, setCommentContent] = useState('');
+  const [commentList, setCommentList] = useState([]);
+  const [keyValue, setKeyValue] = useState(0);
+
+  const onChangeComment = useCallback((e) => {
+    setCommentContent(e.target.value);
+  }, []);
+
+  const onCheckEnter = (e) => {
+    e.preventDefault();
+    if(e.key === 'Enter') {
+      commentPost();
+    }
+  };
 
   const commentPost = useCallback((e) => {
     e.preventDefault();
+    if(commentContent === '') {
+      window.alert('댓글을 입력해주세요.');
+      return;
+    }
+
+    setKeyValue(keyValue + 1);
+
+    const newComment = {
+      id: keyValue,
+      nickname: localStorage.getItem('loginId'),
+      content: commentContent
+    };
+
+    setCommentList(commentList => [...commentList, newComment]);
+  }, [commentContent]);
+
+  useEffect(() => {
     commentRef.current.value = '';
-  }, [])
+  }, [commentList]);
 
   return (
     <CommentContainer>
@@ -71,13 +91,14 @@ function Comment() {
 
         <CommentInputBar>
           <AiOutlineSmile size={30} />
-          <CommentForm onClick={commentPost}>
+          <CommentForm onClick={onCheckEnter}>
             <input
               type='text'
               placeholder='댓글달기...'
               ref={commentRef}
+              onChange={onChangeComment}
             />
-            <button type='submit'>
+            <button type='submit' onClick={commentPost}>
               게시
             </button>
           </CommentForm>
