@@ -15,22 +15,13 @@ const LoginFormStyled = styled.form`
 `;
 
 const Input = styled.input`
-  border: 1px solid;
   color: black;
   font-weight: bold;
   margin-bottom: 5px;
   padding: 0.7rem 0.5rem;
   width: 100%;
   border-radius: 3px;
-
-  ${(props) => props.valid
-      ? `
-          border-color: black;
-        `
-      : `
-          border-color: red;
-        `
-  }
+  border: 1px solid ${({ valid }) => (valid ? 'black' : 'red')};
 `;
 
 const Button = styled.button`
@@ -64,8 +55,8 @@ function LoginForm() {
   const navigate = useNavigate();
   const [id, setId] = useState('');
   const [password, setPassword] = useState('');
-  const [idValid, setIdValid] = useState(false);
-  const [pwdValid, setPwdValid] = useState(false);
+  const [idValid, setIdValid] = useState(true);
+  const [pwdValid, setPwdValid] = useState(true);
   const [validComplete, setValidComplete] = useState(false);
 
   const localStorage = window.localStorage;
