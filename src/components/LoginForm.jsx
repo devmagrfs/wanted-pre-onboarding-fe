@@ -1,6 +1,7 @@
 import React, { useCallback, useRef, useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
+
 import { validation } from '../lib/validation';
 
 
@@ -72,7 +73,6 @@ function LoginForm() {
   const onChangeId = (e) => {
     setId(e.target.value);
     const result = validation(idRef.current.name, e.target.value);
-    console.log(result);
 
     if(result === true) {
       setIdValid(true);
@@ -100,14 +100,12 @@ function LoginForm() {
       alert('동일한 아이디가 존재합니다.');
       return;
     }
-    localStorage.clear();
     localStorage.setItem('loginId', id);
     navigate('/');
   }, [id]);
 
   useEffect(() => {
     if(idValid && pwdValid) {
-      console.log(validComplete);
       setValidComplete(true);
       btnRef.current.disabled = false;
     } else {

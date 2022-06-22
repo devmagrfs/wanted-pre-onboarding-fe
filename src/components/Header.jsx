@@ -1,8 +1,9 @@
 import React, { useCallback } from 'react';
 import styled from 'styled-components';
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 import SmallLogo from '../assets/text_logo.png';
+import { useEffect } from 'react';
 
 const HeaderContainer = styled.div`
   position: sticky;
@@ -57,8 +58,18 @@ const IconBtn = styled.button`
 `;
 
 function Header() {
+  const navigate = useNavigate();
+  const isLogin = !!localStorage.getItem('loginId');
+
+  useEffect(() => {
+    if(isLogin === false) {
+      navigate('/login');
+    }
+  }, [isLogin]);
+
   const logout = useCallback(() => {
     localStorage.clear();
+    navigate('/login');
   }, []);
 
   return(
@@ -69,9 +80,7 @@ function Header() {
         <IconBtn />
         <IconBtn />
         <IconBtn />
-        <Link to='/login'>
-        <IconBtn onClick={logout}>Logout</IconBtn>
-        </Link>
+          <IconBtn onClick={logout}>Logout</IconBtn>
       </ButtonWrapper>
     </HeaderContainer>
   )
