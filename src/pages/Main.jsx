@@ -1,11 +1,25 @@
 import React from 'react';
+import styled from 'styled-components';
+
+import Feed from '../components/Feed';
 import Header from '../components/Header';
+
+
+const MainContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  margin-top: 30px;
+`;
 
 function Main() {
   return(
     <>
       <Header />
-      <div>메인페이지 입니다</div>
+      <MainContainer>
+        <Feed />
+      </MainContainer>
     </>
   )
 }
