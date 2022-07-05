@@ -2,7 +2,7 @@ const emailCheck = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-
 const passwordCheck = /^.*(?=^.{8,}$)(?=.*\d)(?=.*[A-Z])(?=.*[!@#$%^&+=]).*$/;
 
 export const validation = (name, value) => {
-  if(name === 'userId') {
+  if(name === 'email') {
     return emailCheck.test(value);
   }
   if(name === 'password') {

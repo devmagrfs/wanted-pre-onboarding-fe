@@ -1,8 +1,9 @@
-import React, { useCallback, useRef, useState, useEffect } from 'react';
+import React, { useCallback, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 
 import { validation } from '../lib/validation';
+import { theme } from '../styles/theme';
 
 
 const LoginFormStyled = styled.form`
@@ -21,7 +22,7 @@ const Input = styled.input`
   padding: 0.7rem 0.5rem;
   width: 100%;
   border-radius: 3px;
-  border: 1px solid ${({ valid }) => (valid ? 'black' : 'red')};
+  border: 1px solid ${({ valid }) => (valid ? theme.color.primary : theme.color.border)};
 `;
 
 const Button = styled.button`
@@ -29,16 +30,9 @@ const Button = styled.button`
   padding: 0.5rem;
   border-radius: 3px;
   width: 100%;
-
-  ${(props) => props.valid
-      ? `
-          background: skyblue;
-          cursor: pointer;
-        `
-      : `
-          background: gray;
-        `
-  }
+  
+  background: ${( props ) => props.disabled ? theme.color.disabled : theme.color.abled};
+  cursor: ${(disabled) => disabled ? theme.cursor.default : theme.cursor.pointer};
 `;
 
 // 이미 존재하는 아이디 테스트 케이스
@@ -48,89 +42,75 @@ const admin = {
 };
 
 function LoginForm() {
-  const idRef = useRef();
-  const pwdRef = useRef();
-  const btnRef = useRef();
-
   const navigate = useNavigate();
-  const [id, setId] = useState('');
-  const [password, setPassword] = useState('');
-  const [idValid, setIdValid] = useState(true);
-  const [pwdValid, setPwdValid] = useState(true);
-  const [validComplete, setValidComplete] = useState(false);
+  const idRef = useRef(null);
+  const pwdRef = useRef(null);
+
+  const [validStatus, setValidStatus] = useState({
+    email: null,
+    password: null,
+  });
 
   const localStorage = window.localStorage;
+  console.log('rerender 테스트중', validStatus);
 
-  const onChangeId = (e) => {
-    setId(e.target.value);
-    const result = validation(idRef.current.name, e.target.value);
+  const handleInput = (event, ref) => {
+    ref.current.value = event.target.value;
+    const {value, name} = ref.current;
+    const validResult = validation(name, value);
 
-    if(result === true) {
-      setIdValid(true);
-    } else {
-      setIdValid(false);
-      setId(e.target.value);
-    }
+    if(validStatus[name] === validResult) return;
+    setValidStatus((prev) => ({
+      ...prev,
+      [name]: validResult,
+    }));
   };
 
-  const onChangePwd = (e) => {
-    setPassword(e.target.value);
-    const result = validation(pwdRef.current.name, e.target.value);
-
-    if(result === true) {
-      setPwdValid(true);
-    } else {
-      setPwdValid(false);
-      setPassword(e.target.value);
-    }
+  const clearValidStatus = (event, ref) => {
+    if(ref.current.value === '') {
+      setValidStatus((prev) => ({
+        ...prev,
+        [event.target.name]: null,
+      }));
+    };
   };
 
   const onSubmitForm = useCallback((e) => {
     e.preventDefault();
-    if(admin.id === id) {
+    if(admin.id === idRef.current.value) {
       alert('동일한 아이디가 존재합니다.');
       return;
     }
-    localStorage.setItem('loginId', id);
+    localStorage.setItem('loginId', idRef.current.value);
     navigate('/');
-  }, [id]);
-
-  useEffect(() => {
-    if(idValid && pwdValid) {
-      setValidComplete(true);
-      btnRef.current.disabled = false;
-    } else {
-      setValidComplete(false);
-      btnRef.current.disabled = true;
-    }
-  }, [id, password]);
+  }, []);
 
   return(
     <LoginFormStyled onSubmit={onSubmitForm}>
       <Input
         type='text'
         placeholder='전화번호, 사용자 이름 또는 전화번호'
-        onChange={onChangeId}
+        onChange={(event) => handleInput(event, idRef)}
+        onBlur={(event) => clearValidStatus(event, idRef)}
         ref={idRef}
-        valid={idValid}
+        valid={validStatus.email === null ? true : validStatus.email}
         required
-        name='userId'
+        name='email'
       />
       <Input
         type='password'
         placeholder='비밀번호'
-        onChange={onChangePwd}
+        onChange={(event) => handleInput(event, pwdRef)}
+        onBlur={(event) => clearValidStatus(event, pwdRef)}
         ref={pwdRef}
-        valid={pwdValid}
+        valid={validStatus.password === null ? true : validStatus.password}
         required
         name='password'
         autoComplete='off'
       />
       <Button
         htmltype='submit'
-        ref={btnRef}
-        disabled
-        valid={validComplete}
+        disabled={!(validStatus.email && validStatus.password)}
       >
         로그인
       </Button>
