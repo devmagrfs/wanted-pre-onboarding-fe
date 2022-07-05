@@ -18,7 +18,9 @@ function Main() {
   const [feeds, setFeeds] = useState([]);
 
   const getFeed = async () => {
-    const apiFeed = await axios.get('http://localhost:3000/data/feedSample.json');
+    const apiFeed = await axios.get('http://localhost:3000/data/feedSample.json').catch((error) => {
+      alert(error.message);
+    });
     setFeeds(apiFeed.data.feeds);
   }
 

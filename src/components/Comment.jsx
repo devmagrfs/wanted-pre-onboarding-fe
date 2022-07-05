@@ -38,7 +38,7 @@ const CommentForm = styled.form`
   }
 `;
 
-function Comment({ id }) {
+function Comment() {
   const commentRef = useRef();
   const [commentContent, setCommentContent] = useState('');
   const [commentList, setCommentList] = useState([]);
@@ -61,7 +61,6 @@ function Comment({ id }) {
       window.alert('댓글을 입력해주세요.');
       return;
     }
-
     setKeyValue(keyValue + 1);
 
     const newComment = {
@@ -69,7 +68,6 @@ function Comment({ id }) {
       nickname: localStorage.getItem('loginId'),
       content: commentContent
     };
-
     setCommentList(commentList => [...commentList, newComment]);
   }, [commentContent]);
 

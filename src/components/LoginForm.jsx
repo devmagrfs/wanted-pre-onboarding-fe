@@ -3,7 +3,6 @@ import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 
 import { validation } from '../lib/validation';
-import { theme } from '../styles/theme';
 
 
 const LoginFormStyled = styled.form`
@@ -22,7 +21,7 @@ const Input = styled.input`
   padding: 0.7rem 0.5rem;
   width: 100%;
   border-radius: 3px;
-  border: 1px solid ${({ valid }) => (valid ? theme.color.primary : theme.color.border)};
+  border: 1px solid ${({ valid, theme }) => (valid ? theme.color.primary : theme.color.border)};
 `;
 
 const Button = styled.button`
@@ -50,9 +49,7 @@ function LoginForm() {
     email: null,
     password: null,
   });
-
   const localStorage = window.localStorage;
-  console.log('rerender 테스트중', validStatus);
 
   const handleInput = (event, ref) => {
     ref.current.value = event.target.value;
