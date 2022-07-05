@@ -17,17 +17,9 @@ const FeedContainer = styled.div`
   margin-bottom: 2rem;
   border: 2px solid gray;
   border-radius: 4px;
+  visibility: ${({load, theme}) => load ? theme.visibility.visible : theme.visibility.noneVisible};
 
-  ${(props) => props.load
-      ? `
-          visibility: visible;
-        `
-      : `
-          visibility: hidden;
-        `
-  }
-
-  @media screen and (min-width: 576px) {
+  @media ${({ theme }) => theme.deviceSize.min.mobile} {
     max-width: 575px;
   }
 `;

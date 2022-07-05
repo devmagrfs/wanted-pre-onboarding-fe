@@ -14,14 +14,18 @@ export const theme = {
     pointer: 'pointer',
     default: 'default',
   },
+  visibility: {
+    visible: 'visible',
+    noneVisible: 'none',
+  },
   deviceSize: {
     max: {
-      mobile: `(max-width : ${size.mobile})`,
-      desktop: `(max-width : ${size.desktop})`,
+      mobile: `screen and (max-width : ${size.mobile})`,
+      desktop: `screen and (max-width : ${size.desktop})`,
     },
     min: {
-      mobile: `(min-width : ${size.mobile})`,
-      desktop: `(min-width : ${size.desktop})`,
+      mobile: `screen and (min-width : ${size.mobile})`,
+      desktop: `screen and (min-width : ${size.desktop})`,
     },
   },
 }

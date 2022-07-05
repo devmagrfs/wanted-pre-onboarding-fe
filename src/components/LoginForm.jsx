@@ -31,8 +31,8 @@ const Button = styled.button`
   border-radius: 3px;
   width: 100%;
   
-  background: ${( props ) => props.disabled ? theme.color.disabled : theme.color.abled};
-  cursor: ${(disabled) => disabled ? theme.cursor.default : theme.cursor.pointer};
+  background: ${({ disabled, theme }) => disabled ? theme.color.disabled : theme.color.abled};
+  cursor: ${({ disabled, theme }) => disabled ? theme.cursor.default : theme.cursor.pointer};
 `;
 
 // 이미 존재하는 아이디 테스트 케이스

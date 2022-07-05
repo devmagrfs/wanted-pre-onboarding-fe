@@ -25,7 +25,7 @@ const HeaderContainer = styled.div`
   .header-search {
     display: none;
   
-    @media only screen and (min-width: 576px) {
+    @media ${({ theme }) => theme.deviceSize.min.mobile} {
       display: inline;
       width: 200px;
       padding: 0.5rem;
@@ -48,7 +48,7 @@ const ButtonWrapper = styled.div`
   padding: 0;
   min-width: 10rem;
 
-  @media only screen and (min-width: 576px){
+  @media ${({ theme }) => theme.deviceSize.min.mobile} {
     min-width: 10rem;
   }
 `;
