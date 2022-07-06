@@ -44,15 +44,16 @@ function LoginForm() {
   const navigate = useNavigate();
   const idRef = useRef(null);
   const pwdRef = useRef(null);
-
+  
   const [validStatus, setValidStatus] = useState({
     email: null,
     password: null,
   });
-  const localStorage = window.localStorage;
 
+  const localStorage = window.localStorage;
+  
   const handleInput = (event, ref) => {
-    ref.current.value = event.target.value;
+    // ref.current.value = event.target.value;
     const {value, name} = ref.current;
     const validResult = validation(name, value);
 
